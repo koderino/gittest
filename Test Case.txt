@@ -1,0 +1,66 @@
+﻿LPA Tracker :        					
+	if batch upload
+		给LPA tracker上的某个Field赋值Yes
+		走新流程
+		batch upload files
+		生成Ack Letter里面取值的逻辑
+	else	
+		走旧流程
+		给LPA tracker上的某个Field赋值 默认值为No
+		某个Field赋值 老数据为空
+		手动Upload files to root folder
+		check Ack Letter取值逻辑
+	test timer(transfer mapping)
+
+LPA: 
+	from LPA tracker（新流程） to LPA (新Field为Yes)
+	改定制
+	如果LPA不存在，则新Field为Yes
+	如果LPA存在，则Modify新Field为Yes
+	Application Approved:
+		1. Check Specified date/ Registration date(backend)
+		2. Check Notice of Application Letter (42天，Specified Date)
+	Registered:
+		Check Registration_SelfCollection  (没有6周)
+		Check Registration_Post
+		Check Orange Label
+		Check tag orange label
+		Check LPA form with watermark
+
+	from LPA tracker（旧流程） to LPA
+	如果LPA不存在，则新Field为No
+	如果LPA存在，则Modify新Field为No
+	Application Approved:
+		1. Check specified date/ Registration date(backend)
+		2. Check Notice of Application Letter
+	Registered:
+		Check Registration_SelfCollection
+		Check Registration_Post
+		Check Orange Label
+		Check 不生成LPA form and with watermark
+
+	直接New LPA(旧流程)
+	Application Approved:
+		1. Check specified date/ Registration date(backend)
+		2. Check Notice of Application Letter
+	Registered:
+		Check Registration_SelfCollection
+		Check Registration_Post
+		Check Orange Label
+		Check 不生成LPA form and with watermark
+
+	
+LPA Event: 
+	Mannual New LPA event 
+		旧流程的LPA：不生成Event Page
+		生成Transfer Mapping: Timer负责Copy
+
+		新流程的LPA：生成Event Page 并且Merge
+		直接用定制来Transfer olds to news
+
+	Auto New LPA Event
+		旧流程的LPA：不生成Event Page
+		生成Transfer Mapping: Timer负责Copy
+
+		新流程的LPA：生成Event Page 并且Merge
+		直接用定制来Transfer olds to news
